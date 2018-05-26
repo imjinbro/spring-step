@@ -3,16 +3,12 @@ package dao;
 import domain.User;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class UserDao {
+public abstract class UserDao {
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost/springy");
-    }
+    abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
     public void add(User user) throws ClassNotFoundException, SQLException {
         Connection connection = getConnection();
@@ -21,7 +17,8 @@ public class UserDao {
         statement.setString(2, user.getPasswd());
         statement.setString(3, user.getName());
         statement.executeUpdate();
-        statement.close();;
+        statement.close();
+        ;
         connection.close();
     }
 }
