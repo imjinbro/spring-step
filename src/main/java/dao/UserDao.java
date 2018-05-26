@@ -9,9 +9,13 @@ import java.sql.SQLException;
 
 public class UserDao {
 
-    public void add(User user) throws ClassNotFoundException, SQLException {
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/springy");
+        return DriverManager.getConnection("jdbc:mysql://localhost/springy");
+    }
+
+    public void add(User user) throws ClassNotFoundException, SQLException {
+        Connection connection = getConnection();
         PreparedStatement statement = connection.prepareStatement("INSERT INTO USER(id, password, name) VALUES(?, ?, ?)");
         statement.setLong(1, user.getId());
         statement.setString(2, user.getPasswd());
