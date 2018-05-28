@@ -2,13 +2,12 @@ package dao;
 
 import domain.User;
 import util.ConnectionMaker;
-import util.DConnectionMaker;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public abstract class UserDao {
+public class UserDao {
     private ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
